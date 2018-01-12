@@ -1,0 +1,42 @@
+<GridLayout loaded="onLoaded"
+  id="calendarMain"
+  rows="auto"
+  xmlns:gv="nativescript-grid-view"> 
+	
+
+  <GridLayout rows="auto, 30, auto" class="calendar-grid">
+    
+    <GridLayout columns="40, *, 40" class="calendar-container-top">
+      <Image src="~/res/icon_calendar_prev.png" class="calendar-btn-prev" col="0" tap="onPrev" visibility="{{ hasPrev ?  'visible' : 'collapse'}}"/>
+      <Label text="{{ label }}" class="calendar-label" col="1"/>
+      <Image src="~/res/icon_calendar_next.png" class="calendar-btn-next" col="2" tap="onNext" visibility="{{ hasNext ?  'visible' : 'collapse'}}"/>          
+    </GridLayout>
+
+    <gv:GridView row="1" items="{{ weekDays }}" verticalSpacing="1" horizontalSpacing="1" colWidth="{{ colWidth }}" rowHeight="{{ rowHeaderHeight }}">
+      <gv:GridView.itemTemplate>
+          
+          <StackLayout class="calendar-header-item">
+            <Label text="{{ text }}" class="calendar-header-item-text"/>
+          </StackLayout>
+        
+      </gv:GridView.itemTemplate>
+    </gv:GridView>             
+
+    <gv:GridView 
+        row="2" items="{{ days }}" itemTap="onDateTap"
+        height="{{ height }}"
+        verticalSpacing="3" horizontalSpacing="1" 
+        colWidth="{{ colWidth }}" rowHeight="{{ rowHeight }}">
+      <gv:GridView.itemTemplate>
+          
+          <StackLayout class="{{ cssClassContainer }}">
+            <Label text="{{ text }}" class="{{ cssClassText }}"/>
+          </StackLayout>
+        
+      </gv:GridView.itemTemplate>
+    </gv:GridView>  
+
+  </GridLayout> 
+
+     
+</GridLayout>
