@@ -36,8 +36,8 @@ Change `common.css` as you prefere.
 * `minDate`: Min date to show in calendar
 * `maxDate`: Max date to show in calendar
 * `disableEndWeekDays`: Disable all week days to all months showed
-* `months`: Month names, default pt-br
-* `weekDays`: Weekday names to show, default pt-br
+* `months`: Names of months, default pt-br
+* `weekDays`: Names of weekdays, default pt-br
 
 ```
     calendar = page.getViewById("calendar")
@@ -67,3 +67,5 @@ Change `common.css` as you prefere.
     
 ```
 
+
+![alt text](https://github.com/mobilemindtec/nativescript-calendar-inline/blob/master/screenshot.png)
