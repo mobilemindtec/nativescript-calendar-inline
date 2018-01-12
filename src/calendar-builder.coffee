@@ -75,9 +75,12 @@ class CalendarBuilder
 
     if args 
       
-      if args.weekDays
+      if args.weekDays and args.weekDays.length > 0
         @weekDays = args.weekDays
       
+      if args.months and args.months.length > 0
+        @months = args.months
+
       if args.startDate
         @startDate = args.startDate
       
