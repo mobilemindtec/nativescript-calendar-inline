@@ -1,7 +1,7 @@
 observable = require 'data/observable'
 platform = require "platform"
 calendarBuilder = require "./calendar-builder"
-moment = require('~/support/moment')
+moment = require('moment-mini')
 
 that = { }
 
