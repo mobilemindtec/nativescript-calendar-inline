@@ -1,7 +1,7 @@
 var CalendarBuilder, moment, observable,
   indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
-moment = require('~/support/moment');
+moment = require('moment-mini');
 
 observable = require('data/observable');
 
