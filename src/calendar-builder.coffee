@@ -1,4 +1,4 @@
-moment = require('~/support/moment')
+moment = require('moment-mini')
 observable = require 'data/observable'
 
 class CalendarBuilder 
