@@ -5,6 +5,8 @@
 #### Code 
 Import the code `build` content to `app/xml-declaration/Calendar` in yout project. 
 
+Add `moment-mini` dependency.
+
 #### Icons 
 
 And `arrow-icons` to `app/res` in yout project. Or else change icon location in file `Calendar.xml`
