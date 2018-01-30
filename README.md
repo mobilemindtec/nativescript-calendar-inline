@@ -4,7 +4,6 @@ this plugin depends on `nativescript-grid-view` and `moment-mini`
 
 #### Properties
 
-<<<<<<< HEAD
 * rowHeight - row height
 * rowWidth - row width
 * weekdayNames - weekday names
@@ -18,12 +17,6 @@ this plugin depends on `nativescript-grid-view` and `moment-mini`
 * iconPrev - arrow icon prev
 * iconNext - arrow icon next
 * itemTap - item tap event
-=======
-Add `moment-mini` dependency.
-
-#### Icons 
->>>>>>> fd4b644c5938389d10ea201e5f138288d201ad70
-
 
 ## Styles
 
