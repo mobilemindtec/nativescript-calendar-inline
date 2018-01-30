@@ -2,7 +2,7 @@
 
 this plugin depends on `nativescript-grid-view` and `moment-mini`
 
-#### Properties
+### Properties
 
 * rowHeight - row height
 * rowWidth - row width
@@ -17,6 +17,9 @@ this plugin depends on `nativescript-grid-view` and `moment-mini`
 * iconPrev - arrow icon prev
 * iconNext - arrow icon next
 * itemTap - item tap event
+
+
+See demo to more details
 
 ## Styles
 
