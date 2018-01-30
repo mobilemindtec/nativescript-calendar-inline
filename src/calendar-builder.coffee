@@ -1,4 +1,4 @@
-moment = require('~/support/moment')
+moment = require('moment-mini')
 observable = require 'data/observable'
 
 class CalendarBuilder 
@@ -106,6 +106,9 @@ class CalendarBuilder
 
     @onDates(@startDate)
 
+  setMonths: (mts) ->
+    @months = mts
+
   onLabel: () ->
     month = @months[@current.get('month')]
     year = @current.get('year')
@@ -165,96 +168,84 @@ class CalendarBuilder
 
     if startDayOfWeek > -1
       for i in [0..startDayOfWeek]
-        dates.push({
+        dates.push(observable.fromObject({
           text: ""
-          valid: false 
-          cssClassContainer: 'calendar-data-item calendar-data-item-invalid'
-          cssClassText: 'calendar-data-item-text'
-        })
+          invalid: true
+          bgStyle: ''
+          bgClasse: ''
+          textStyle: ''
+          textClasse: ''
+        }))
 
     for i in [1..lastDayOfMount]
 
-      cssClassContainer = 'calendar-data-item'
-      cssClassText = 'calendar-data-item-text'
-      valid = true
-
-      # check date is today
-      if today == i
-        cssClassContainer = 'calendar-data-item calendar-data-item-today'
-        cssClassText = 'calendar-data-item-text calendar-data-item-text-today'
+      enabled =  true
+      selected = false
 
 
       # disable week days
       if @disableEndWeekDays        
         dayOfWeek = moment(currentDate).date(i).day()
         if dayOfWeek == 0 || dayOfWeek == 6
-          cssClassContainer = 'calendar-data-item calendar-data-item-disable'
-          cssClassText = 'calendar-data-item-text calendar-data-item-text-disable'
-          valid = false
+          enabled = false
 
       if @weekDaysToDisable
         dayOfWeek = moment(currentDate).date(i).day()
         if dayOfWeek in @weekDaysToDisable
-          cssClassContainer = 'calendar-data-item calendar-data-item-disable'
-          cssClassText = 'calendar-data-item-text calendar-data-item-text-disable'
-          valid = false
+          enabled = false
 
       if @daysToDisable
         for date in @daysToDisable
           if moment(currentDate).date(i).isSame(date, 'day')
-            cssClassContainer = 'calendar-data-item calendar-data-item-disable'
-            cssClassText = 'calendar-data-item-text calendar-data-item-text-disable'
-            valid = false
+            enabled = false
 
       # disable min date
       if minDateCheck != -1
         if i <= minDateCheck 
-          cssClassContainer = 'calendar-data-item calendar-data-item-disable'
-          cssClassText = 'calendar-data-item-text calendar-data-item-text-disable'          
-          valid = false
+          enabled = false
 
       if maxDateCheck != -1
         if i >= maxDateCheck
-          cssClassContainer = 'calendar-data-item calendar-data-item-disable'
-          cssClassText = 'calendar-data-item-text calendar-data-item-text-disable'          
-          valid = false      
+          enabled = false    
 
       date = moment(currentDate).date(i).format('YYYY-MM-DD')
       if @selected
         if moment(date).isSame(@selected.get('date'))
-          cssClassContainer = 'calendar-data-item calendar-data-item-selected'
-          cssClassText = 'calendar-data-item-text calendar-data-item-text-selected'
+          selected = true
 
-      dates.push(observable.fromObject({
-        valid: valid
+      dataItem = observable.fromObject({
         text: i 
-        today: today == i 
-        cssClassContainer: cssClassContainer
-        cssClassText: cssClassText
-        cssClassContainerCopy: cssClassContainer
-        cssClassTextCopy: cssClassText
+        today: today == i
         date: date
-      }))
+        enabled: enabled
+        selected: selected
+        bgStyle: ''
+        bgClasse: ''
+        textStyle: ''
+        textClasse: ''        
+      })
+      dates.push(dataItem)
+
+      if selected
+        @selected = dataItem
     
     @days = dates
     @onLabel()
     return dates
 
   onSelect: (item) ->
-    if item && item.get('valid')
+    if item && !item.get('invalid')
       
       @onUnselect()
       
       @selected = item
 
-      @selected.set('cssClassContainer', 'calendar-data-item calendar-data-item-selected')
-      @selected.set('cssClassText', 'calendar-data-item-text calendar-data-item-text-selected')
+      @selected.set('selected', true)
 
 
   onUnselect: () ->
     if @selected      
-      @selected.set('cssClassContainer', @selected.cssClassContainerCopy)
-      @selected.set('cssClassText',  @selected.cssClassTextCopy)
+      @selected.set('selected', false)
 
 
 exports.CalendarBuilder = CalendarBuilder

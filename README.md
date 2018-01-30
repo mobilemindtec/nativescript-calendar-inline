@@ -1,71 +1,65 @@
 # nativescript-calendar-inline
 
-### how to use
+this plugin depends on `nativescript-grid-view` and `moment-mini`
 
-#### Code 
-Import the code `build` content to `app/xml-declaration/Calendar` in yout project. 
+#### Properties
 
-#### Icons 
+* rowHeight - row height
+* rowWidth - row width
+* weekdayNames - weekday names
+* monthNames - month names
+* startDate - start date
+* minDate - min date
+* maxDate - max date
+* disableWeekend - if weekend should be disable
+* weekendsToDisable - list of wek days to disable (0..6)
+* daysToDisable - list of dates do disable
+* iconPrev - arrow icon prev
+* iconNext - arrow icon next
+* itemTap - item tap event
 
-And `arrow-icons` to `app/res` in yout project. Or else change icon location in file `Calendar.xml`
 
-#### Style
+## Styles
 
-Change `common.css` as you prefere.
-
-#### Use caledar XML
+You can override all style classes
 
 ```
-<Page loaded="onLoaded"
-  xmlns:Calendar="xml-declaration/Calendar">
+@import '~nativescript-calendar-inline/calendar.css';
+```
 
+## Add calendar
 
-  <GridLayout rows="*">
-    
-    <Calendar:Calendar id="calendar" />
+```
+<Page 
+    xmlns="http://schemas.nativescript.org/tns.xsd" 
+    navigatingTo="onNavigatingTo" 
+    class="page"
+    xmlns:cal="nativescript-calendar-inline">
 
-  </GridLayout>
+    <GridLayout id="main" style='padding-top: 30'>
+        <cal:Calendar id="calendar"
+            itemTap="itemTap"
+        />
+    </GridLayout>
 
 </Page>
-```
-
-#### Initialize calendar in JS code
-
-* `weekDaysToDisable`: days of week to disable, 0..6 (sun, sat) (`int`)
-* `daysToDisable`: List of dates to disable (`Date`)
-* `minDate`: Min date to show in calendar
-* `maxDate`: Max date to show in calendar
-* `disableEndWeekDays`: Disable all week days to all months showed
-* `months`: Names of months, default pt-br
-* `weekDays`: Names of weekdays, default pt-br
-
-```
-    calendar = page.getViewById("calendar")
-
-    weekDaysToDisable = []
-    daysToDisable = []
-
-    limiteMin = that.getIntervaloMinimoDiasEntrega()
-    limiteMax = that.getIntervaloMaximoDiasEntrega()
-
-    minDate = moment().date() # today
-    maxDate = moment().add('days', 90) # today + 90 days
-
-    calendar.bindingContext.onConfigure({
-      weekDaysToDisable: []
-      daysToDisable: []
-      minDate: minDate
-      maxDate: maxDate
-      disableEndWeekDays: true
-      months: []
-      weekDays: []
-    })
     
-    # bind date select event
-    calendar.bindingContext.listener = (data) ->
-      # do something
     
 ```
 
+## Selected date event
 
-![alt text](https://github.com/mobilemindtec/nativescript-calendar-inline/blob/master/screenshot.png)
+```
+exports.itemTap = (ev) => {
+  console.log("date selected " + ev.date)
+}
+
+```
+
+
+
+
+![alt text](https://github.com/mobilemindtec/nativescript-calendar-inline/blob/master/img-1.png)
+
+
+![alt text](https://github.com/mobilemindtec/nativescript-calendar-inline/blob/master/img-2.png)
