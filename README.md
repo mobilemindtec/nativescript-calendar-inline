@@ -2,6 +2,10 @@
 
 this plugin depends on `nativescript-grid-view` and `moment-mini`
 
+### Install plugin
+
+Add `"nativescript-calendar-inline": "https://github.com/mobilemindtec/nativescript-calendar-inline.git"` on dependencies.
+
 ### Properties
 
 * rowHeight - row height
